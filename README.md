@@ -2,6 +2,8 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+Going off of the learnings here https://www.udemy.com/course/react-front-to-back-2022
+
 ## Available Scripts
 
 In the project directory, you can run:
