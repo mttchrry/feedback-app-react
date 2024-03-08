@@ -1,25 +1,59 @@
-import logo from './logo.svg';
-import './App.css';
+import Header from "./components/Header"
+import FeedbackList from "./components/FeedbackList"
+import { useState } from "react"
+import FeedbackData from "./data/feedbackData"
+import FeedbackStats from "./components/FeedbackStats"
+import FeedbackForm from "./components/FeedbackForm"
+import { v4 as uuidv4 } from "uuid"
+import AboutPage from "./components/pages/AboutPage"
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
+import AboutIconLink from "./components/AboutIconLink"
 
 function App() {
+  const [feedback, setFeedback] = useState(FeedbackData)
+  const loading = false
+
+  if (loading) return <h1>Loading...</h1>
+
+  const deleteFeedback = (id) => {
+    console.log("app ", id)
+    if (window.confirm("Are you sure you want to delete?")) {
+      setFeedback(feedback.filter((item) => item.id !== id))
+    }
+  }
+
+  const addFeedback = (newFeedback) => {
+    newFeedback.id = uuidv4()
+    console.log(newFeedback)
+    setFeedback([newFeedback, ...feedback])
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    // empty fragment, no div
+    <Router>
+      <Header />
+      <div className="container">
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={
+              <>
+                <FeedbackForm handleAdd={addFeedback} />
+                <FeedbackStats feedback={feedback} />
+                <FeedbackList
+                  feedback={feedback}
+                  handleDelete={deleteFeedback}
+                />
+              </>
+            }
+          />
+          <Route path="/about" element={<AboutPage />} />
+        </Routes>
+        <AboutIconLink />
+      </div>
+    </Router>
+  )
 }
 
-export default App;
+export default App
