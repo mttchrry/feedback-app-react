@@ -1,7 +1,7 @@
 import Card from "./shared/Card"
 import Button from "./shared/Button"
 import RatingSelect from "./RatingSelect"
-import { React, useContext, useState, UseEffect, useEffect } from "react"
+import { React, useContext, useState, useEffect } from "react"
 import FeedbackContext from "../context/FeedbackContext"
 
 function FeedbackForm({ handleAdd }) {
@@ -49,7 +49,6 @@ function FeedbackForm({ handleAdd }) {
       } else {
         addFeedback(newFeedback)
       }
-      // handleAdd(newFeedback)
       setText("")
     }
   }

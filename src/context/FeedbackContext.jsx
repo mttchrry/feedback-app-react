@@ -41,8 +41,6 @@ export const FeedbackProvider = ({ children }) => {
   }
 
   const updateFeedback = (uptd) => {
-    // feedback.filter((id:item.id))
-    // console.log("Udpate item ", item.id)
     setFeedback(
       feedback.map((item) =>
         item.id === uptd.id
